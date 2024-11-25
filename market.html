@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Danvic Marketing</title>
+    
+    
+    <style type="text/css">
+    
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    }
+    
+    header {
+    background: brown;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    }
+    
+    nav ul {
+    list-style: none;
+    padding: 0;
+    }
+    
+    nav ul li {
+    display: inline;
+    margin: 0 15px;
+    }
+    
+    nav ul li a {
+    color: white;
+    text-decoration: none;
+    }
+    
+    section {
+    padding: 20px;
+    margin: 20px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    }
+    
+    footer {
+    text-align: center;
+    padding: 10px;
+    background: brown;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    }
+    
+    input, textarea {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+    
+    button {
+    background: brown;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    button:hover {
+    background: #0056b3;
+    }
+    
+    
+    </style>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1>Welcome to Danvic Marketing</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At Danvic, we specialize in innovative marketing solutions to help your business grow.</p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Social Media Marketing</li>
+            <li>Search Engine Optimization</li>
+            <li>Content Creation</li>
+            <li>Brand Strategy</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="form-message"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Danvic Marketing. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+    
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const messageDiv = document.getElementById('form-message');
+    messageDiv.innerText = 'Thank you for your message! We will get back to you shortly.';
+    this.reset(); // Reset the form
+    });
+    
+    
+    </script>
+</body>
+</html>

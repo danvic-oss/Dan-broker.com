@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Danvic Trading Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style type="text/css">
+    
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:#696969;
+    }
+    
+    header {
+    background:brown;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    }
+    
+    main {
+    padding: 20px;
+    text-align: center;
+    }
+    
+    .controls {
+    margin: 20px 0;
+    }
+    
+    button {
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    }
+    
+    button:hover {
+    background: #0056b3;
+    }
+    
+    #message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    }
+    .controls input {
+    padding: 10px;
+    margin: 0 5px;
+    }
+    input{
+    background-color:#DCDCDC;
+    border-radius:20px;
+    color:black;
+    }
+    #trading{
+    gap:20px;
+    color:yellow;
+    }
+    
+    #trading1{
+   
+    background-color:silver;
+    padding-top:30px;
+    padding-bottom:100px;
+    display:block;
+   
+    }
+    
+    #demo-btn{
+    position:relative;
+    top:100px;
+    
+    }
+    
+    #trade-amount{
+    position:relative;
+    top:5px;
+    }
+    #trade-currency{
+    position:relative;
+    top:20px;
+    }
+    
+    #trade-duration{
+    position:relative;
+    top:35px;}
+    
+    footer{
+    color:white;
+    font-size:10px;
+    position:relative;
+    left:50px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Danvic Trading Platform</h1>
+    </header>
+
+    <main>
+        <section id="trading"style="background-color:grey;">
+            <canvas id="priceChart" width="400" height="200"style="background-color:silver;"></canvas>
+            <div class="controls">
+                <button id="buy-btn"style="background-color:green;">Buy</button>
+                <button id="sell-btn"style="background-color:red;">Sell</button>
+            </div>
+            <div id="message"></div>
+        </section>
+    
+ <section id="trading1"style="">
+    
+        <input type="text" id="trade-amount" placeholder="Amount to Trade" required>
+        <input type="text" id="trade-currency" placeholder="Currency (e.g., USD, EUR)" required>
+        <br>
+        <input type="number" id="trade-duration" placeholder="Duration (in minutes)" required>
+        <br>
+        <button id="demo-btn"style="background-color:green;">Demo Account</button>
+    </div>
+    <div id="message"></div>
+</section>
+
+</main>
+    <footer>
+        <p>&copy; 2023 Danvic Trading Platform. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+    
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    let chartData = {
+    labels: [],
+    datasets: [{
+    label: 'Price',
+    data: [],
+    borderColor: 'red',
+    backgroundColor: 'brown',
+    borderWidth: 2
+    }]
+    };
+    
+    const priceChart = new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: {
+    scales: {
+    x: {
+    type: 'linear',
+    position: 'bottom'
+    },
+    y: {
+    beginAtZero: false
+    }
+    }
+    }
+    });
+    
+    // Simulate price changes
+    let price = 100; // starting price
+    setInterval(() => {
+    price += (Math.random() - 0.5); // Random fluctuation
+    price = parseFloat(price.toFixed(2)); // Limit to 2 decimal places
+    
+    chartData.labels.push(chartData.labels.length);
+    chartData.datasets[0].data.push(price);
+    priceChart.update();
+    }, 1000); // Update price every second
+    
+    document.getElementById('buy-btn').addEventListener('click', () => {
+    const currentPrice = chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
+    document.getElementById('message').innerText = `You bought at $${currentPrice}`;
+    });
+    
+    document.getElementById('sell-btn').addEventListener('click', () => {
+    const currentPrice = chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
+    document.getElementById('message').innerText = `You sold at $${currentPrice}`;
+    });
+    
+    document.getElementById('buy-btn').addEventListener('click', () => {
+    const currentPrice = chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
+    const amount = document.getElementById('trade-amount').value;
+    const currency = document.getElementById('trade-currency').value;
+    const duration = document.getElementById('trade-duration').value;
+    
+    if (amount && currency && duration) {
+    document.getElementById('message').innerText = `You bought ${amount} ${currency} at $${currentPrice} for ${duration} minutes.`;
+    } else {
+    alert('Please fill in all fields!');
+    }
+    });
+    
+    document.getElementById('sell-btn').addEventListener('click', () => {
+    const currentPrice = chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
+    const amount = document.getElementById('trade-amount').value;
+    const currency = document.getElementById('trade-currency').value;
+    const duration = document.getElementById('trade-duration').value;
+    
+    if (amount && currency && duration) {
+    document.getElementById('message').innerText = `You sold ${amount} ${currency} at $${currentPrice} for ${duration} minutes.`;
+    } else {
+    alert('Please fill in all fields!');
+    }
+    });
+    
+    // Demo Account functionality
+    document.getElementById('demo-btn').addEventListener('click', () => {
+    document.getElementById('message').innerText = 'Demo account activated. You can trade without risk.';
+    });
+    </script>
+</body>
+</html>
